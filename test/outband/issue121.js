@@ -11,7 +11,13 @@ tmp.setGracefulCleanup();
 
 // https://github.com/raszi/node-tmp/issues/121
 module.exports = function (signal) {
-  fixture.apply(this, [tmp.dirSync({ unsafeCleanup: true }), tmp]);
+  try {
+    fixture.apply(this, [tmp.dirSync({ unsafeCleanup: true }), tmp]);
+  }
+  catch (ex) {
+    console.err(ex);
+    throw ex;
+  }
 
   // make sure that the process keeps running
   setTimeout(function () {}, 1000000);
