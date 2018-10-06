@@ -48,8 +48,6 @@ function _doSpawn(commandArgs, cb) {
   child = spawn(node_path, commandArgs);
   child.stdin.end();
 
-  // TODO we no longer support node 0.6
-  // Cannot use 'close' event because not on node-0.6.
   function _close() {
     var
       stderr = _bufferConcat(stderrBufs).toString(),

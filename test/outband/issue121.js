@@ -11,6 +11,10 @@ tmp.setGracefulCleanup();
 
 // https://github.com/raszi/node-tmp/issues/121
 module.exports = function (signal) {
+
+console.log(arguments);
+throw new Error("SHIZE: " + signal);
+
   try {
     fixture.apply(this, [tmp.dirSync({ unsafeCleanup: true }), tmp]);
   }
@@ -20,7 +24,7 @@ module.exports = function (signal) {
   }
 
   // make sure that the process keeps running
-  setTimeout(function () {}, 1000000);
+  setTimeout(function () {}, 10000);
 
   this.kill(signal);
 };
